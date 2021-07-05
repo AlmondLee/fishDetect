@@ -27,7 +27,7 @@
 # 布署运行
    - 将[frps](https://example.com "frp的server端")运行布署在一台低延迟高带宽**具有公网ip**的服务器(A)上
 
-   - 将[frpc](https://example.com "frp的client端")运行布署在一台网速足够快并且[**能够运行识别程序**](https://example.com "目前的python代码需要有gpu以及不弱的cpu")的计算机(B)上, frpc会在A机器上注册服务, 将对 https://adl.seafishery.com 的请求(本质上是对A服务器443端口的https请求)转发到B机器的本地端口20778
+   - 将[frpc](https://example.com "frp的client端")运行布署在一台网速足够快并且 [**能够运行识别程序**](https://example.com "目前的python代码需要有gpu以及不弱的cpu") 的计算机(B)上, frpc会在A机器上注册服务, 将对 https://adl.seafishery.com 的请求(本质上是对A服务器443端口的https请求)转发到B机器的本地端口20778
 
    - 在B机器上运行go语言编写的调度程序, 运行之后会监听20778端口提供服务, 同时会在开始运行时就并发地执行两个pythonListener函数, 它们分别开始运行yolov5/ssd的两个识别程序, 这个时候就会将模型载入显存(以减少识别时这部份IO读写将占据的时间), 并且这两个python程序的标准输出流(stdout)将会被两个pythonListener分别接管, 而传入参数(图片路径)则是通过标准输出流(stdin)从调度程序发给python识别程序, pythonListener函数在它后半部分的for(死循环)的开头会一直阻塞, 等待路由给他传图片路径
 
