@@ -50,8 +50,13 @@
 <br>
 
 [^ckwx1]: 或Apache
+
 [^ckwx2]: 如果不是可信的https服务, 上传/下载的数据可能会被网络上的其他人篡改, 接口将会无法被微信小程序使用
+
 [^ckwx3]: 这里指本项目中用于替代nginx或Apache的frp
+
 [^ckwx4]: frp的server端
+
 [^ckwx5]: frp的client端
+
 [^ckwx6]: 目前的python代码需要有gpu以及不弱的cpu
